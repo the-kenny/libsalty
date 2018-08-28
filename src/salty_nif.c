@@ -42,7 +42,7 @@
 #define SALTY_BADARG enif_make_badarg(env)
 #define SALTY_BADALLOC SALTY_BADARG /* TODO make this return an actual failed-to-alloc error */
 
-#define SALTY_ERROR tuple_error_unknown
+#define SALTY_ERROR enif_make_tuple2(env, atom_error, atom_error_unknown)
 #define SALTY_ERROR_PAIR(err) enif_make_tuple2(env, atom_error, err)
 #define SALTY_OK atom_ok
 #define SALTY_OK_PAIR(a) enif_make_tuple2(env, atom_ok, a)
@@ -415,7 +415,6 @@ ERL_NIF_TERM atom_error_no_match;
 ERL_NIF_TERM atom_error_not_available;
 ERL_NIF_TERM atom_error_forged;
 ERL_NIF_TERM atom_error_unknown;
-ERL_NIF_TERM tuple_error_unknown;
 
 /* erl_nif code */
 static int
@@ -429,7 +428,6 @@ salty_onload(ErlNifEnv* env, void** priv_data, ERL_NIF_TERM load_info) {
     atom_error_not_available = enif_make_atom(env, "not_available");
     atom_error_forged        = enif_make_atom(env, "forged");
     atom_error_unknown       = enif_make_atom(env, "salty_error_unknown");
-    tuple_error_unknown      = enif_make_tuple2(env, atom_error, atom_error_unknown);
 
     return 0;
 }
