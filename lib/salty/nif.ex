@@ -206,6 +206,8 @@ defmodule Salty.Nif do
   def sign_ed25519_SECRETKEYBYTES, do: :erlang.exit(:salty_nif_not_loaded)
   def sign_ed25519_seed_keypair(_), do: :erlang.exit(:salty_nif_not_loaded)
   def sign_ed25519_keypair(), do: :erlang.exit(:salty_nif_not_loaded)
+  def crypto_sign_ed25519_pk_to_curve25519(_), do: :erlang.exit(:salty_nif_not_loaded)
+  def crypto_sign_ed25519_sk_to_curve25519(_), do: :erlang.exit(:salty_nif_not_loaded)
   def sign_ed25519(_,_), do: :erlang.exit(:salty_nif_not_loaded)
   def sign_ed25519_detached(_,_), do: :erlang.exit(:salty_nif_not_loaded)
   def sign_ed25519_verify_detached(_,_,_), do: :erlang.exit(:salty_nif_not_loaded)

@@ -130,4 +130,9 @@ defmodule SaltyTest do
     assert Salty.Sign.Ed25519.sk_to_pk(sk) == pk
   end
 
+  test "crypto_sign_ed25519_{pk,sk}_to_curve25519 works" do
+    {:ok, pk, sk} = Salty.Sign.Ed25519.keypair()
+    {:ok, _} = Salty.Sign.Ed25519.crypto_sign_ed25519_pk_to_curve25519(pk)
+    {:ok, _} = Salty.Sign.Ed25519.crypto_sign_ed25519_sk_to_curve25519(sk)
+  end
 end

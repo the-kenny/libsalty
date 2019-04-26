@@ -1662,6 +1662,24 @@ SALTY_FUNC(sign_ed25519_keypair, 0) DO
                 pk.data, sk.data), pk, sk);
 END_OK_WITH2(pk, sk);
 
+SALTY_FUNC(crypto_sign_ed25519_pk_to_curve25519, 1) DO
+    SALTY_INPUT_BIN(0, pk_ed25519, crypto_sign_ed25519_PUBLICKEYBYTES);
+\
+    SALTY_OUTPUT_BIN(pk_curve25519, crypto_box_curve25519xchacha20poly1305_PUBLICKEYBYTES);
+
+    SALTY_CALL2(crypto_sign_ed25519_pk_to_curve25519(
+                pk_curve25519.data, pk_ed25519.data), pk_ed25519, pk_curve25519);
+END_OK_WITH(pk_curve25519);
+
+SALTY_FUNC(crypto_sign_ed25519_sk_to_curve25519, 1) DO
+    SALTY_INPUT_BIN(0, sk_ed25519, crypto_sign_ed25519_PUBLICKEYBYTES);
+\
+    SALTY_OUTPUT_BIN(sk_curve25519, crypto_box_curve25519xchacha20poly1305_SECRETKEYBYTES);
+
+    SALTY_CALL2(crypto_sign_ed25519_sk_to_curve25519(
+                sk_curve25519.data, sk_ed25519.data), sk_ed25519, sk_curve25519);
+END_OK_WITH(sk_curve25519);
+
 SALTY_FUNC(sign_ed25519, 2) DO
     SALTY_INPUT_BIN(0, data, SALTY_BIN_NO_SIZE);
     SALTY_INPUT_BIN(1, sk, crypto_sign_ed25519_SECRETKEYBYTES);
@@ -2194,6 +2212,8 @@ salty_exports[] = {
     SALTY_EXPORT_CONS(sign_ed25519_SECRETKEYBYTES, 0),
     SALTY_EXPORT_FUNC(sign_ed25519_seed_keypair, 1),
     SALTY_EXPORT_FUNC(sign_ed25519_keypair, 0),
+    SALTY_EXPORT_FUNC(crypto_sign_ed25519_pk_to_curve25519, 1),
+    SALTY_EXPORT_FUNC(crypto_sign_ed25519_sk_to_curve25519, 1),
     SALTY_EXPORT_FUNC(sign_ed25519, 2),
     SALTY_EXPORT_FUNC(sign_ed25519_detached, 2),
     SALTY_EXPORT_FUNC(sign_ed25519_verify_detached, 3),

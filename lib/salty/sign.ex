@@ -53,6 +53,10 @@ defmodule Salty.Sign do
 
   @callback keypair() :: {:ok, binary(), binary()} | {:error, atom()}
 
+  @callback crypto_sign_ed25519_pk_to_curve25519(binary()) :: {:ok, binary()} | {:error, atom()}
+
+  @callback crypto_sign_ed25519_sk_to_curve25519(binary()) :: {:ok, binary()} | {:error, atom()}
+
   @callback sign(binary(), binary()) :: {:ok, binary()} | {:error, atom()}
 
   @callback sign_detached(binary(), binary()) :: {:ok, binary()} | {:error, atom()}

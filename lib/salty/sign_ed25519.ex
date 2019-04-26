@@ -25,6 +25,14 @@ defmodule Salty.Sign.Ed25519 do
     C.sign_ed25519_keypair()
   end
 
+  def crypto_sign_ed25519_pk_to_curve25519(data) do
+    C.crypto_sign_ed25519_pk_to_curve25519(data)
+  end
+
+  def crypto_sign_ed25519_sk_to_curve25519(data) do
+    C.crypto_sign_ed25519_sk_to_curve25519(data)
+  end
+
   def sign(data, sk) do
     C.sign_ed25519(data, sk)
   end
