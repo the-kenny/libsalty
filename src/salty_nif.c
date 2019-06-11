@@ -1662,7 +1662,6 @@ END_OK_WITH2(pk, sk);
 
 SALTY_FUNC(crypto_sign_ed25519_pk_to_curve25519, 1) DO
     SALTY_INPUT_BIN(0, pk_ed25519, crypto_sign_ed25519_PUBLICKEYBYTES);
-\
     SALTY_OUTPUT_BIN(pk_curve25519, crypto_box_curve25519xchacha20poly1305_PUBLICKEYBYTES);
 
     SALTY_CALL2(crypto_sign_ed25519_pk_to_curve25519(
